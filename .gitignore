@@ -40,3 +40,5 @@ public/sitemap.xml
 .env*.local
 
 .vercel
+*.msi
+*.msi
