@@ -1,0 +1,35 @@
+Function TEXTJOIN(delimiter As String, ignore_empty As Boolean, ParamArray str() As Variant) As String
+    
+    Dim element As Variant
+    Dim cell As Range
+    Dim JoinStr As String
+    
+    For Each element In str
+        
+        If TypeName(element) = "Range" Then
+            
+            For Each cell In element.Cells
+                
+                If Len(cell.Value) > 0 Or ignore_empty = False Then
+                    
+                    JoinStr = JoinStr & delimiter & cell.Value
+                
+                End If
+            
+            Next
+        
+        Else
+
+            If Len(element) > 0 Or ignore_empty = False Then
+                
+                JoinStr = JoinStr & delimiter & element
+            
+            End If
+        
+        End If
+    
+    Next
+    
+    TEXTJOIN = Mid(JoinStr, Len(delimiter) + 1)
+    
+End Function

@@ -8,14 +8,14 @@ import { useConfig } from '@/lib/config'
 import { createHash } from 'crypto'
 import Container from '@/components/Container'
 import Post from '@/components/Post'
-import Comments from '@/components/Comments'
+// ❌ Comments import 제거
+// import Comments from '@/components/Comments'
 
-export default function BlogPost ({ post, blockMap, emailHash }) {
+export default function BlogPost({ post, blockMap, emailHash }) {
   const router = useRouter()
   const BLOG = useConfig()
   const locale = useLocale()
 
-  // TODO: It would be better to render something
   if (router.isFallback) return null
 
   const fullWidth = post.fullWidth ?? false
@@ -26,7 +26,6 @@ export default function BlogPost ({ post, blockMap, emailHash }) {
       title={post.title}
       description={post.summary}
       slug={post.slug}
-      // date={new Date(post.publishedAt).toISOString()}
       type="article"
       fullWidth={fullWidth}
     >
@@ -65,12 +64,13 @@ export default function BlogPost ({ post, blockMap, emailHash }) {
         </a>
       </div>
 
-      <Comments frontMatter={post} />
+      {/* ❌ 댓글 제거됨 */}
+      {/* <Comments frontMatter={post} /> */}
     </Container>
   )
 }
 
-export async function getStaticPaths () {
+export async function getStaticPaths() {
   const posts = await getAllPosts({ includePages: true })
   return {
     paths: posts.map(row => `${clientConfig.path}/${row.slug}`),
@@ -78,7 +78,7 @@ export async function getStaticPaths () {
   }
 }
 
-export async function getStaticProps ({ params: { slug } }) {
+export async function getStaticProps({ params: { slug } }) {
   const posts = await getAllPosts({ includePages: true })
   const post = posts.find(t => t.slug === slug)
 

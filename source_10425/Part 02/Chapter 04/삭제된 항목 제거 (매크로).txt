@@ -1,0 +1,18 @@
+Sub 삭제항목제거()
+
+   Dim 필드 As PivotField
+   Dim 항목 As PivotItem
+
+   On Error Resume Next
+
+   For Each 필드 In ActiveSheet.PivotTables(1).PivotFields
+
+       For Each 항목 In 필드.PivotItems
+
+           항목.Delete
+
+       Next
+
+   Next
+
+End Sub
