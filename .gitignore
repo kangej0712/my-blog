@@ -42,3 +42,4 @@ public/sitemap.xml
 .vercel
 *.msi
 *.msi
+*msi
